@@ -2,7 +2,7 @@ const asyncHandler = require('express-async-handler');
 const Menu = require('../models/menuModel');
 
 // @desc Get all menu items
-// @route GET /api/menu
+// @route GET /api/menus
 // @access Private
 const getMenu = asyncHandler(async (req, res) => {
     const menu = await Menu.find({});
@@ -10,7 +10,7 @@ const getMenu = asyncHandler(async (req, res) => {
 });
 
 // @desc Create a menu item
-// @route POST /api/menu
+// @route POST /api/menus
 // @access Private
 const createMenuItem = asyncHandler(async (req, res) => {
     const { name, description, price, image, category } = req.body;
@@ -31,7 +31,7 @@ const createMenuItem = asyncHandler(async (req, res) => {
 });
 
 // @desc Update a menu item
-// @route PUT /api/menu/:id
+// @route PUT /api/menus/:id
 // @access Private
 const updateMenuItem = asyncHandler(async (req, res) => {
     const menuItem = await Menu.findById(req.params.id);
@@ -41,15 +41,13 @@ const updateMenuItem = asyncHandler(async (req, res) => {
         throw new Error('Menu item not found');
     }
 
-    // menuItem.name = req.body.name || menuItem.name;
-    // menuItem.description = req.body.description || menuItem.description;
-    // menuItem.price = req.body.price || menuItem.price;
-
     const updatedMenuItem = await Menu.findByIdAndUpdate(req.params.id, req.body, { new: true });
     res.json(updatedMenuItem);
 });
 
-// Delete a menu item
+// @desc Delete a menu item
+// @route DELETE /api/menus/:id
+// @access Private
 const deleteMenuItem = asyncHandler(async (req, res) => {
     const menuItem = await Menu.findById(req.params.id);
 
