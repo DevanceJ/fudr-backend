@@ -8,8 +8,7 @@ connectDB();
 const app = express();
 const port = process.env.PORT || 3000;
 
-// app.use(cors({ origin: '*' }));
-app.use(cors());
+app.use(cors({ origin: 'https://fudr.vercel.app' }));
 app.use(express.json());
 app.use('/api/users', require('./routes/userRoutes'));
 app.use('/api/menus', require('./routes/menuRoutes'));
